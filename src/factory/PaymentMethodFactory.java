@@ -12,7 +12,7 @@ public class PaymentMethodFactory {
     public static IPaymentMethod scanPaymentMethod() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("enter a PaymentMethod: ");
+        System.out.print("ödeme yöntemi giriniz: ");
         String className = scanner.nextLine();
 
         try {
@@ -20,7 +20,7 @@ public class PaymentMethodFactory {
             IPaymentMethod paymentMethod;
 
             if (cls.isAnnotationPresent(RequiresCardType.class)) {
-                System.out.print("enter CreditCardType (VISA, MASTERCARD, TROY): ");
+                System.out.print("kredi-kart tipi giriniz(VISA, MASTERCARD, TROY): ");
                 String cardTypeInput = scanner.nextLine().toUpperCase();
                 CreditCardType cardType = CreditCardType.valueOf(cardTypeInput);
 
