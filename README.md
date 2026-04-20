@@ -1,5 +1,8 @@
 # n11bootcamp - 1. ödevi
 
+![UML diagram](./n11.1-uml.jpeg)
+
+
 Person class'ı bir alışveriş sitesine üye olan kullanıcıyı temsil ediyor.
 Bu yüzden Person'ın bir alışveriş sitesinde var olması için gerekli ve yeter koşullar olarak:
 
