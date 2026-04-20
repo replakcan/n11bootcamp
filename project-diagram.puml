@@ -1,5 +1,4 @@
-@startuml
-title n11bootcamp-first-hw Class Diagram
+@startuml n11bootcamp-first-hw Class Diagram
 
 skinparam classAttributeIconSize 0
 skinparam shadowing false
