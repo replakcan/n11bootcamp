@@ -8,6 +8,7 @@ public class Person {
     private Cart cart;
 
     public Person(Profile profile, IPaymentMethod iPaymentMethod, Wallet wallet, Cart cart) {
+        this.profile = profile;
         this.iPaymentMethod = iPaymentMethod;
         this.wallet = wallet;
         this.cart = cart;
