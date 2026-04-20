@@ -1,0 +1,173 @@
+@startuml
+title n11bootcamp-first-hw Class Diagram
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam linetype ortho
+
+package annotation {
+  annotation RequiresCardType
+}
+
+package entity {
+  interface IPaymentMethod {
+    +getName() : String
+    +makeDiscount() : double
+  }
+
+  interface IDisplayable {
+    +displayInfo() : void
+  }
+
+  abstract class PaymentMethod {
+    -name : String
+    +PaymentMethod(name : String)
+    +getName() : String
+    +setName(name : String) : void
+  }
+
+  enum CreditCardType {
+    VISA
+    MASTERCARD
+    TROY
+  }
+
+  class CreditCard {
+    -type : CreditCardType
+    +CreditCard(type : CreditCardType)
+    +getType() : CreditCardType
+    +setType(type : CreditCardType) : void
+    +makeDiscount() : double
+    +displayInfo() : void
+  }
+
+  class GiftCard {
+    +GiftCard()
+    +makeDiscount() : double
+    +displayInfo() : void
+  }
+
+  class ShoppingCard {
+    +ShoppingCard()
+    +makeDiscount() : double
+    +displayInfo() : void
+  }
+
+  class PayPal {
+    +PayPal(name : String)
+    +makeDiscount() : double
+    +displayInfo() : void
+  }
+
+  class Profile {
+    -name : String
+    -age : int
+    +Profile(name : String, age : int)
+    +getName() : String
+    +getAge() : int
+    +setName(name : String) : void
+    +setAge(age : int) : void
+  }
+
+  class Wallet {
+    -balance : double
+    +Wallet(startingBalance : double)
+    +getBalance() : double
+    +setBalance(balance : double) : void
+  }
+
+  class CartItem {
+    -id : String
+    -name : String
+    -price : double
+    +CartItem(id : String, name : String, price : double)
+    +getId() : String
+    +getName() : String
+    +getPrice() : double
+    +setId(id : String) : void
+    +setName(name : String) : void
+    +setPrice(price : double) : void
+    +printItemInfo() : void
+  }
+
+  class Cart {
+    -itemList : ArrayList<CartItem>
+    +Cart()
+    +getItemList() : ArrayList<CartItem>
+    +setItemList(itemList : ArrayList<CartItem>) : void
+    +calculateCartTotal() : double
+    +addItem(item : CartItem) : void
+    +dropItem(item : CartItem) : void
+    +emptyCart() : void
+    +listCartItems() : void
+  }
+
+  class Person {
+    -profile : Profile
+    -iPaymentMethod : IPaymentMethod
+    -wallet : Wallet
+    -cart : Cart
+    +Person(profile : Profile, iPaymentMethod : IPaymentMethod, wallet : Wallet, cart : Cart)
+    +getProfile() : Profile
+    +getiPaymentMethod() : IPaymentMethod
+    +getWallet() : Wallet
+    +getCart() : Cart
+    +setProfile(profile : Profile) : void
+    +setiPaymentMethod(iPaymentMethod : IPaymentMethod) : void
+    +setWallet(wallet : Wallet) : void
+    +setCart(cart : Cart) : void
+    +checkoutCart() : void
+    +addBalance(amount : int) : double
+    +addItemToCart(item : CartItem) : void
+    +removeItemFromCart(item : CartItem) : void
+    +listCartItems() : void
+    +calculateCheckoutAmount() : double
+    +printPersonInfo() : void
+  }
+}
+
+package factory {
+  class PaymentMethodFactory {
+    +scanPaymentMethod() : IPaymentMethod
+  }
+}
+
+PaymentMethod <|-- CreditCard
+PaymentMethod <|-- GiftCard
+PaymentMethod <|-- ShoppingCard
+PaymentMethod <|-- PayPal
+
+IPaymentMethod <|.. CreditCard
+IPaymentMethod <|.. GiftCard
+IPaymentMethod <|.. ShoppingCard
+IPaymentMethod <|.. PayPal
+
+IDisplayable <|.. CreditCard
+IDisplayable <|.. GiftCard
+IDisplayable <|.. ShoppingCard
+IDisplayable <|.. PayPal
+
+CreditCard ..> CreditCardType
+CreditCard ..> RequiresCardType
+
+Person *-- Profile
+Person *-- Wallet
+Person *-- Cart
+Person --> IPaymentMethod
+Cart *-- "0..*" CartItem
+
+PaymentMethodFactory ..> IPaymentMethod
+PaymentMethodFactory ..> CreditCardType
+PaymentMethodFactory ..> RequiresCardType
+PaymentMethodFactory ..> CreditCard
+PaymentMethodFactory ..> GiftCard
+PaymentMethodFactory ..> ShoppingCard
+PaymentMethodFactory ..> PayPal
+
+note right of PaymentMethodFactory
+Uses reflection with class names under
+the `entity` package to create payment
+method instances at runtime.
+end note
+
+@enduml
