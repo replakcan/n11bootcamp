@@ -85,7 +85,6 @@ public class Person {
         return cartTotal - (cartTotal * discount);
     }
 
-    // [TODO] [Alper] profil bilgisini de yazdırt.
     public void printPersonInfo() {
         System.out.println("Default payment method: " + this.iPaymentMethod.getName());
         System.out.println("------------------------");

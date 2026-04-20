@@ -1,6 +1,5 @@
 package entity;
 
-// [TODO] [Alper] iDisplayable'ı burada implement etmek de mantıklı mı bi düşün.
 public class Profile {
 
     private String name;
