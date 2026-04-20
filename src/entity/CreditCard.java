@@ -1,5 +1,8 @@
 package entity;
 
+import annotation.RequiresCardType;
+
+@RequiresCardType
 public class CreditCard extends PaymentMethod implements IPaymentMethod, IDisplayable {
 
     private CreditCardType type;
